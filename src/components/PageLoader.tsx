@@ -64,15 +64,6 @@ export default function PageLoader() {
     };
   }, []);
 
-  const exitAnimation = reduceMotion
-    ? { opacity: 0, transition: { duration: 0.4 } }
-    : {
-        opacity: 0,
-        scale: 1.1,
-        filter: 'blur(16px)',
-        transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
-      };
-
   return (
     <AnimatePresence>
       {visible && (
@@ -80,7 +71,11 @@ export default function PageLoader() {
           key="page-loader"
           // Exit: loader zooms out + blurs away — page "rushes in"
           initial={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-          exit={exitAnimation}
+          exit={
+            reduceMotion
+              ? { opacity: 0, transition: { duration: 0.4 } }
+              : { opacity: 0, scale: 1.1, filter: 'blur(16px)', transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] } }
+          }
           style={{
             position: 'fixed',
             inset: 0,
