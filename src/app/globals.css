@@ -1,26 +1,201 @@
+/* Tailwind v4 */
 @import "tailwindcss";
 
+@theme {
+  /* Font families — CSS variables injected by next/font/google on <html> */
+  --font-family-display: var(--font-display);
+  --font-family-body:    var(--font-body);
+  --font-family-mono:    var(--font-mono);
+
+  /* Brand colors — now usable as text-accent, bg-accent, border-accent2, etc. */
+  --color-accent:  #e8ff47;
+  --color-accent2: #ff4747;
+  --color-muted:   #555555;
+
+  /* Animations */
+  --animate-marquee:     marquee 20s linear infinite;
+  --animate-pulse-dot:   pulse-dot 2s ease-in-out infinite;
+  --animate-scroll-line: scrollLine 2s ease-in-out infinite;
+}
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:         #050505;
+  --bg2:        #0a0a0a;
+  --accent:     #e8ff47;
+  --accent2:    #ff4747;
+  --text:       #f0f0f0;
+  --muted:      #555555;
+  --border:     rgba(255, 255, 255, 0.06);
+  --glass:      rgba(255, 255, 255, 0.03);
+
+
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ─── Reset & Base ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; position: relative; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Keyframes ─────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { transform: translateY(105%); }
+  to   { transform: translateY(0); }
+}
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes scrollLine {
+  0%     { transform: scaleY(0); transform-origin: top; }
+  50%    { transform: scaleY(1); transform-origin: top; }
+  50.01% { transform-origin: bottom; }
+  100%   { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes rotateSlowly {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes clockGlow {
+  0%   { text-shadow: 0 0 8px rgba(232,255,71,0.7), 0 0 16px rgba(232,255,71,0.3); color: var(--accent); }
+  60%  { text-shadow: 0 0 4px rgba(232,255,71,0.3); color: var(--muted); }
+  100% { text-shadow: none; color: var(--muted); }
+}
+
+/* ─── Custom Cursor ──────────────────────────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s;
+  will-change: transform;
+}
+.cursor-dot.hovered {
+  width: 40px;
+  height: 40px;
+  background: var(--accent2);
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 255, 71, 0.6);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s, border-color 0.25s;
+  will-change: transform;
+}
+.cursor-ring.hovered {
+  opacity: 0;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
+  body { cursor: auto; }
+}
+
+/* ─── Marquee ────────────────────────────────────────────────────────────── */
+.marquee-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  animation: marquee 25s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+.marquee-inner:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Section Label line ─────────────────────────────────────────────────── */
+.section-label-line {
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+/* ─── Scroll indicator ───────────────────────────────────────────────────── */
+.scroll-line {
+  animation: scrollLine 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: transform;
+}
+
+/* ─── Glass card ─────────────────────────────────────────────────────────── */
+.glass-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ─── Glow text ──────────────────────────────────────────────────────────── */
+.text-glow {
+  text-shadow: 0 0 40px rgba(232, 255, 71, 0.4),
+               0 0 80px rgba(232, 255, 71, 0.15);
+}
+
+/* ─── Shimmer effect ─────────────────────────────────────────────────────── */
+.shimmer {
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 60%
+  );
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── Selection color ────────────────────────────────────────────────────── */
+::selection {
+  background: var(--accent);
+  color: #000;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
