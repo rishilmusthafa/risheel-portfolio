@@ -1,12 +1,15 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-declare global {
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
-      'spline-viewer': React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement>, HTMLElement
-      > & { url: string; loading?: string };
+      'spline-viewer': {
+        url: string;
+        loading?: string;
+        style?: import('react').CSSProperties;
+        className?: string;
+      };
     }
   }
 }
