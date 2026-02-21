@@ -3,27 +3,59 @@ import type { Job, Project, SkillCategory, SkillBar, Stat } from '@/types';
 export const jobs: Job[] = [
     {
         id: 1,
-        period: "2022 — Present",
-        company: "Enterprise App Dev Co.",
-        role: "Frontend Engineer",
-        description: "Building enterprise-grade web applications in Next.js. Led the initiative for a component library system to streamline design-to-code workflows. Integrated AI-powered tools into the development pipeline.",
-        tags: ["Next.js", "TypeScript", "shadcn/ui", "Figma"]
+        period: "2020 — Present",
+        company: "e& enterprise",
+        role: "Senior Software Engineer",
+        description: "Building enterprise-grade software solutions for one of UAE's leading telecommunications groups. Driving technical decisions, architecting scalable systems, and collaborating across cross-functional product teams.",
+        tags: ["Enterprise Apps", "Next.js", "TypeScript", "React"]
     },
     {
         id: 2,
-        period: "2021 — 2022",
-        company: "Previous Role",
-        role: "Junior Frontend Developer",
-        description: "Developed responsive interfaces, worked closely with design teams to translate Figma mockups into pixel-perfect implementations. API integration work.",
-        tags: ["React", "CSS", "REST API"]
+        period: "2019 — 2020",
+        company: "HyperMedia Dubai",
+        role: "Full Stack Developer",
+        description: "Developed full-stack web solutions for a digital agency serving clients across the UAE. Built responsive front-end interfaces and server-side systems from requirements through deployment.",
+        tags: ["Full Stack", "PHP", "JavaScript", "React"]
     },
     {
         id: 3,
-        period: "2020 — 2021",
-        company: "Freelance & Projects",
+        period: "2018",
+        company: "Rayaat",
         role: "Web Developer",
-        description: "Delivered custom web solutions including a Quran application and automation workflows. Began exploring AI tools and workflow automation systems.",
-        tags: ["React Native", "Node.js", "Automation"]
+        description: "Designed and built client-facing web applications, managing the full development lifecycle from requirements gathering to delivery.",
+        tags: ["PHP", "WordPress", "HTML/CSS"]
+    },
+    {
+        id: 4,
+        period: "2017",
+        company: "Team Power International",
+        role: "Lead Web Developer",
+        description: "Led web development projects for a Dubai-based firm, guiding technical direction and coordinating with teams to deliver quality client solutions on schedule.",
+        tags: ["PHP", "WordPress", "Team Lead", "JavaScript"]
+    },
+    {
+        id: 5,
+        period: "2015 — 2017",
+        company: "Advanced Interactive Media Solutions (AIMS)",
+        role: "Software Developer",
+        description: "Developed web software at a media-city digital agency. Built custom web applications and contributed to client projects spanning corporate, media, and e-commerce sectors.",
+        tags: ["PHP", "JavaScript", "WordPress", "MySQL"]
+    },
+    {
+        id: 6,
+        period: "2013 — 2015",
+        company: "Krea8ve Minds",
+        role: "Technical Lead",
+        description: "Led development of WordPress themes, plugins, and custom PHP applications in MVC architecture. Managed LAMP server environments, elicited client requirements, delivered design mock-ups, and mentored team members.",
+        tags: ["WordPress", "PHP", "MySQL", "MVC", "SVN"]
+    },
+    {
+        id: 7,
+        period: "2011 — 2013",
+        company: "Adox Solutions",
+        role: "PHP Developer",
+        description: "Built WordPress sites with custom themes and plugins, and programmed PHP web applications including CMS, e-commerce, and PDF solutions. Worked with MySQL and SVN in a collaborative development environment.",
+        tags: ["WordPress", "PHP", "MySQL", "MVC"]
     }
 ];
 
@@ -109,7 +141,7 @@ export const marqueeItems: string[] = [
 ];
 
 export const stats: Stat[] = [
-    { number: "4+", label: "Years of Experience" },
+    { number: "12+", label: "Years of Experience" },
     { number: "50+", label: "Projects Shipped" },
     { number: "12+", label: "AI Tools Mastered" },
     { number: "∞", label: "Problems Solved" }

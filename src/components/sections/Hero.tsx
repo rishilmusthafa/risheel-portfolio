@@ -289,7 +289,7 @@ export default function Hero() {
           animate="visible"
           style={{ marginBottom: '56px' }}
         >
-          {(['Front', 'End', 'Engineer'] as const).map((word, i) => (
+          {(['Senior', 'Software', 'Engineer'] as const).map((word, i) => (
             <div key={word} style={{ overflow: 'hidden', lineHeight: 0.92 }}>
               <motion.span
                 variants={lineVariants}

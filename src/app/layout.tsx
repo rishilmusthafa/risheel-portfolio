@@ -30,12 +30,12 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Risheel — Frontend Engineer',
+  title: 'Risheel — Senior Software Engineer',
   description:
-    'Frontend Engineer based in Dubai. Specialising in Next.js, AI-powered workflows, and enterprise-scale applications.',
+    'Senior Software Engineer based in Dubai. Specialising in Next.js, AI-powered workflows, and enterprise-scale applications.',
   openGraph: {
-    title: 'Risheel — Frontend Engineer',
-    description: 'Frontend Engineer based in Dubai.',
+    title: 'Risheel — Senior Software Engineer',
+    description: 'Senior Software Engineer based in Dubai.',
     type: 'website',
   },
 };

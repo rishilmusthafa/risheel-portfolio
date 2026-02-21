@@ -59,7 +59,7 @@ export default function Footer() {
       />
 
       <span style={monoStyle}>© {year} Risheel. All rights reserved.</span>
-      <span style={monoStyle}>Frontend Engineer · Dubai, UAE</span>
+      <span style={monoStyle}>Senior Software Engineer · Dubai, UAE</span>
       {/* key={time} remounts span on each tick → restarts clockGlow animation */}
       <span
         key={time}

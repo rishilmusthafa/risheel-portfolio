@@ -137,7 +137,7 @@ export default function PageLoader() {
               marginTop: '4px',
             }}
           >
-            Frontend Engineer · Dubai
+            Senior Software Engineer · Dubai
           </motion.p>
         </motion.div>
       )}

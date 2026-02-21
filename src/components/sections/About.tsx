@@ -171,9 +171,9 @@ export default function About() {
             {[
               <>
                 I&apos;m a{' '}
-                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Frontend Engineer</strong>{' '}
-                based in Dubai with 4+ years of experience building production-ready interfaces
-                that are fast, accessible, and visually refined.
+                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Senior Software Engineer</strong>{' '}
+                based in Dubai with 12+ years of experience building production-ready software
+                that is fast, accessible, and visually refined.
               </>,
               <>
                 My work lives at the intersection of{' '}
@@ -218,7 +218,7 @@ export default function About() {
             className="grid-cols-2 max-sm:grid-cols-1"
           >
             {stats.map((stat, i) => (
-              <StatCard key={stat.number} stat={stat} index={i} />
+              <StatCard key={stat.label} stat={stat} index={i} />
             ))}
           </div>
         </div>
