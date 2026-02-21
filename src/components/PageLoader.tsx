@@ -70,7 +70,7 @@ export default function PageLoader() {
         opacity: 0,
         scale: 1.1,
         filter: 'blur(16px)',
-        transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+        transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
       };
 
   return (
