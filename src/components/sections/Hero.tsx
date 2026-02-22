@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
+import { useMusicPlayer } from '@/context/MusicPlayerContext';
 
 /**
  * Hero uses THREE layered parallax systems:
@@ -16,6 +17,7 @@ import { useScrollProgress } from '@/hooks/useScrollProgress';
 export default function Hero() {
   const [videoReady, setVideoReady] = useState(false);
   const scrollY = useScrollProgress();
+  const { triggerPlay } = useMusicPlayer();
 
   // ── Mouse parallax setup ─────────────────────────────────────────────────
   // Normalized 0→1, centred at 0.5
@@ -97,7 +99,7 @@ export default function Hero() {
           playsInline
           preload="auto"
           onLoadedData={() => setVideoReady(true)}
-          onCanPlay={() => setVideoReady(true)}
+          onCanPlay={() => { setVideoReady(true); triggerPlay(); }}
           style={{
             position: 'absolute',
             inset: 0,

@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { Bebas_Neue, Bricolage_Grotesque, DM_Mono } from 'next/font/google';
 import './globals.css';
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
+import { MusicPlayerProvider } from '@/context/MusicPlayerContext';
 import PageLoader from '@/components/PageLoader';
 import CustomCursor from '@/components/ui/CustomCursor';
 import NoiseOverlay from '@/components/ui/NoiseOverlay';
+import MusicPlayer from '@/components/ui/MusicPlayer';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
@@ -45,12 +47,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${bebasNeue.variable} ${bricolage.variable} ${dmMono.variable}`}>
       <body>
         <SmoothScrollProvider>
-          <PageLoader />
-          <CustomCursor />
-          <NoiseOverlay />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <MusicPlayerProvider>
+            <PageLoader />
+            <CustomCursor />
+            <NoiseOverlay />
+            <MusicPlayer />
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </MusicPlayerProvider>
         </SmoothScrollProvider>
       </body>
     </html>

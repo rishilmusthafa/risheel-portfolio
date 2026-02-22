@@ -89,11 +89,14 @@ function JobItem({ job, index }: { job: Job; index: number }) {
         <div
           style={{
             fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-            fontSize: '13px',
-            color: 'var(--accent)',
+            fontSize: '11px',
+            backgroundColor: 'var(--accent)',
+            color: '#000',
             letterSpacing: '0.06em',
             marginBottom: '16px',
             textTransform: 'uppercase' as const,
+            display: 'inline-block',
+            padding: '2px 10px',
           }}
         >
           {job.role}
