@@ -115,15 +115,27 @@ export const projects: Project[] = [
 export const skills: SkillCategory[] = [
     {
         category: "Frontend Core",
-        tags: ["Next.js 14+", "React", "TypeScript", "Tailwind CSS", "shadcn/ui", "Framer Motion", "CSS Animations"]
+        tags: ["Next.js 14+", "React", "TypeScript", "Tailwind CSS", "shadcn/ui", "Framer Motion", "CSS Animations", "Zustand", "TanStack Query", "Zod", "GSAP", "Vite"]
     },
     {
         category: "AI & Automation",
-        tags: ["Claude AI", "Claude Code", "Cursor IDE", "n8n", "MCP Integrations", "Prompt Engineering", "Multi-Agent Systems"]
+        tags: ["Claude AI", "Claude Code", "Cursor IDE", "n8n", "MCP Integrations", "Prompt Engineering", "Multi-Agent Systems", "OpenAI API", "LangChain", "RAG Pipelines", "Ollama", "AI Agents", "Hugging Face", "OpenRouter", "Gemini API", "Make", "Tripo3D", "Meshy AI"]
     },
     {
         category: "Tools & Workflow",
-        tags: ["Figma", "Git / GitHub", "REST APIs", "Node.js", "Playwright", "Vercel", "Context7 MCP"]
+        tags: ["Figma", "Git / GitHub", "REST APIs", "Node.js", "Playwright", "Vercel", "Context7 MCP", "Docker", "GitHub Actions", "Supabase", "Prisma ORM", "Postman"]
+    },
+    {
+        category: "Backend & Database",
+        tags: ["Supabase", "PostgreSQL", "Prisma ORM", "tRPC", "Node.js", "REST APIs", "Drizzle ORM"]
+    },
+    {
+        category: "DevOps & Infra",
+        tags: ["Docker", "GitHub Actions", "Vercel", "Cloudflare Workers", "AWS", "CI/CD"]
+    },
+    {
+        category: "Testing & Quality",
+        tags: ["Playwright", "Vitest", "Jest", "ESLint", "Prettier", "Storybook"]
     }
 ];
 
@@ -131,7 +143,11 @@ export const skillBars: SkillBar[] = [
     { label: "Next.js / React", value: 95 },
     { label: "TypeScript", value: 88 },
     { label: "AI Tooling", value: 92 },
-    { label: "UI/UX Impl.", value: 90 }
+    { label: "UI/UX Impl.", value: 90 },
+    { label: "Prompt Engineering", value: 93 },
+    { label: "Automation (n8n)", value: 88 },
+    { label: "Full-Stack Dev", value: 91 },
+    { label: "Node.js / Backend", value: 80 }
 ];
 
 export const marqueeItems: string[] = [

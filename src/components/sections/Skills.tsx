@@ -153,7 +153,7 @@ export default function Skills() {
         </div>
 
         {/* Skill Bars */}
-        <div ref={barsRef} style={{ maxWidth: '640px', width: '100%' }}>
+        <div ref={barsRef} style={{ width: '100%' }}>
           {/* Accent line above label */}
           <motion.div
             initial={{ scaleX: 0 }}
@@ -173,7 +173,10 @@ export default function Skills() {
           >
             Proficiency Index
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          <div
+            style={{ display: 'grid', gap: '32px 48px' }}
+            className="grid-cols-2 max-sm:grid-cols-1"
+          >
             {skillBars.map((bar, i) => (
               <div key={bar.label}>
                 <div
