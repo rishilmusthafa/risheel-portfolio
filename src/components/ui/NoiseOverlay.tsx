@@ -3,6 +3,7 @@
 export default function NoiseOverlay() {
   return (
     <div
+      aria-hidden="true"
       style={{
         position: 'fixed',
         inset: 0,

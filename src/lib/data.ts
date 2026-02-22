@@ -64,6 +64,16 @@ export const projects: Project[] = [
         id: 1,
         number: "01",
         featured: true,
+        title: "DevOps AI",
+        description: "AI assistant for querying DevOps infrastructure through natural language, using a hybrid SmartAnalyzer + Azure GPT-4o pipeline with pgvector-powered semantic search.",
+        tags: ["Azure OpenAI", "Next.js", "Docker"],
+        gradient: "linear-gradient(135deg, #0a1a20 0%, #0d3045 50%, #050f18 100%)",
+        href: "#"
+    },
+    {
+        id: 2,
+        number: "02",
+        featured: false,
         title: "Instruction Stability Engine",
         description: "Converts vague AI prompts into structured instructions and measures output consistency across multiple LLM runs.",
         tags: ["Claude AI", "LLM", "TypeScript"],
@@ -71,8 +81,8 @@ export const projects: Project[] = [
         href: "#"
     },
     {
-        id: 2,
-        number: "02",
+        id: 3,
+        number: "03",
         featured: false,
         title: "Enterprise Component Library",
         description: "Design-to-code workflow system enabling faster UI delivery from Figma.",
@@ -81,8 +91,8 @@ export const projects: Project[] = [
         href: "#"
     },
     {
-        id: 3,
-        number: "03",
+        id: 4,
+        number: "04",
         featured: false,
         title: "AI Code Review System",
         description: "Multi-agent pipeline with subagents for static analysis and test generation.",
@@ -91,8 +101,8 @@ export const projects: Project[] = [
         href: "#"
     },
     {
-        id: 4,
-        number: "04",
+        id: 5,
+        number: "05",
         featured: false,
         title: "WhatsApp Automation Platform",
         description: "Enterprise-grade WhatsApp automation and customer service workflows.",
@@ -101,13 +111,23 @@ export const projects: Project[] = [
         href: "#"
     },
     {
-        id: 5,
-        number: "05",
+        id: 6,
+        number: "06",
         featured: false,
         title: "Quran Application",
         description: "Mobile-first Quran reading experience with clean typography.",
         tags: ["React Native", "Audio"],
         gradient: "linear-gradient(135deg, #0f0f1f 0%, #1a1a3f 50%, #0a0a1a 100%)",
+        href: "#"
+    },
+    {
+        id: 7,
+        number: "07",
+        featured: false,
+        title: "Smart Khateeb",
+        description: "AI-powered speech evaluation system for Islamic sermons (Khutbah), scoring fluency, engagement, vocal variety, modulation, and linguistic accuracy using Whisper transcription and Librosa audio signal processing.",
+        tags: ["Whisper AI", "Streamlit", "Python"],
+        gradient: "linear-gradient(135deg, #1a1200 0%, #2e2000 50%, #0f0b00 100%)",
         href: "#"
     }
 ];

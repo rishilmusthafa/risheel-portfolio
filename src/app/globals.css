@@ -199,3 +199,24 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.12);
 }
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+/* Collapses all CSS animations/transitions for users who opt out of motion.  */
+/* Framer Motion honours this automatically via its own media-query check.    */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Focus visible ring ─────────────────────────────────────────────────── */
+/* Keyboard nav: shows accent-coloured ring on any focused interactive elem.  */
+/* Using :focus-visible so mouse clicks do NOT show the ring (UX-clean).      */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

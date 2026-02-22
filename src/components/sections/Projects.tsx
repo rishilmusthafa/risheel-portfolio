@@ -14,11 +14,13 @@ import type { Project } from '@/types';
 
 // Per-project accent orb positions
 const ORB_POSITIONS = [
-  { top: '30%', left: '62%' },
-  { top: '55%', left: '25%' },
-  { top: '20%', left: '50%' },
-  { top: '65%', left: '42%' },
-  { top: '38%', left: '68%' },
+  { top: '45%', left: '35%' },  // DevOps AI
+  { top: '30%', left: '62%' },  // Instruction Stability Engine
+  { top: '55%', left: '25%' },  // Enterprise Component Library
+  { top: '20%', left: '50%' },  // AI Code Review System
+  { top: '65%', left: '42%' },  // WhatsApp Automation Platform
+  { top: '38%', left: '68%' },  // Quran Application
+  { top: '50%', left: '30%' },  // Smart Khateeb
 ];
 
 const WIPE_TRANSITION = {
