@@ -56,14 +56,14 @@ export const metadata: Metadata = {
     title: 'Risheel — Senior Software Engineer',
     description: 'Senior Software Engineer based in Dubai. Next.js · AI · Enterprise Apps.',
     locale: 'en_US',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Risheel — Senior Software Engineer' }],
+    images: [{ url: '/LinkedinPost.png', width: 1200, height: 630, alt: 'Risheel — Senior Software Engineer' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Risheel — Senior Software Engineer',
     description: 'Senior Software Engineer based in Dubai. Next.js · AI · Enterprise Apps.',
     creator: '@risheel',
-    images: ['/opengraph-image'],
+    images: ['/LinkedinPost.png'],
   },
   icons: {
     icon: '/favicon.ico',
