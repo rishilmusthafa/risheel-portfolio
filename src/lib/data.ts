@@ -68,27 +68,30 @@ export const projects: Project[] = [
         description: "AI assistant for querying DevOps infrastructure through natural language, using a hybrid SmartAnalyzer + Azure GPT-4o pipeline with pgvector-powered semantic search.",
         tags: ["Azure OpenAI", "Next.js", "Docker"],
         gradient: "linear-gradient(135deg, #0a1a20 0%, #0d3045 50%, #050f18 100%)",
-        href: "#"
+        href: "#",
+        image: "/projects/devopsai.png"
     },
     {
         id: 2,
         number: "02",
         featured: false,
-        title: "Instruction Stability Engine",
-        description: "Converts vague AI prompts into structured instructions and measures output consistency across multiple LLM runs.",
-        tags: ["Claude AI", "LLM", "TypeScript"],
-        gradient: "radial-gradient(ellipse at 30% 50%, #0f1f0a 0%, #050a04 60%)",
-        href: "#"
+        title: "Sharjah Safari",
+        description: "Website for the UAE's largest wildlife reserve, featuring online ticket booking, live animal cams, interactive safari maps, and conservation program showcases.",
+        tags: ["WordPress", "PHP", "CSS"],
+        gradient: "linear-gradient(135deg, #0f1f0a 0%, #1a3311 50%, #0a1a08 100%)",
+        href: "https://sharjahsafari.ae/en/",
+        image: "/projects/sharjahsafari.png"
     },
     {
         id: 3,
         number: "03",
         featured: false,
-        title: "Enterprise Component Library",
-        description: "Design-to-code workflow system enabling faster UI delivery from Figma.",
-        tags: ["Next.js", "shadcn/ui"],
-        gradient: "linear-gradient(135deg, #0f1f0a 0%, #1a3311 50%, #0a1a08 100%)",
-        href: "#"
+        title: "NHRI UAE",
+        description: "Official website for the UAE's National Human Rights Institution, with a multilingual complaint submission portal, media center, and public awareness resources.",
+        tags: ["Laravel", "PHP", "CSS"],
+        gradient: "linear-gradient(135deg, #0a1020 0%, #0d2045 50%, #060c1a 100%)",
+        href: "https://nhriuae.com/en",
+        image: "/projects/nhriuae.png"
     },
     {
         id: 4,
@@ -104,30 +107,30 @@ export const projects: Project[] = [
         id: 5,
         number: "05",
         featured: false,
-        title: "WhatsApp Automation Platform",
-        description: "Enterprise-grade WhatsApp automation and customer service workflows.",
-        tags: ["n8n", "WhatsApp API"],
-        gradient: "linear-gradient(135deg, #1f1a0a 0%, #3d2d10 50%, #1a1208 100%)",
+        title: "Smart Khateeb",
+        description: "AI-powered speech evaluation system for Islamic sermons (Khutbah), scoring fluency, engagement, vocal variety, modulation, and linguistic accuracy using Whisper transcription and Librosa audio signal processing.",
+        tags: ["Whisper AI", "Streamlit", "Python"],
+        gradient: "linear-gradient(135deg, #1a1200 0%, #2e2000 50%, #0f0b00 100%)",
         href: "#"
     },
     {
         id: 6,
         number: "06",
         featured: false,
-        title: "Quran Application",
-        description: "Mobile-first Quran reading experience with clean typography.",
-        tags: ["React Native", "Audio"],
-        gradient: "linear-gradient(135deg, #0f0f1f 0%, #1a1a3f 50%, #0a0a1a 100%)",
+        title: "Instruction Stability Engine",
+        description: "Converts vague AI prompts into structured instructions and measures output consistency across multiple LLM runs.",
+        tags: ["Claude AI", "LLM", "TypeScript"],
+        gradient: "radial-gradient(ellipse at 30% 50%, #0f1f0a 0%, #050a04 60%)",
         href: "#"
     },
     {
         id: 7,
         number: "07",
         featured: false,
-        title: "Smart Khateeb",
-        description: "AI-powered speech evaluation system for Islamic sermons (Khutbah), scoring fluency, engagement, vocal variety, modulation, and linguistic accuracy using Whisper transcription and Librosa audio signal processing.",
-        tags: ["Whisper AI", "Streamlit", "Python"],
-        gradient: "linear-gradient(135deg, #1a1200 0%, #2e2000 50%, #0f0b00 100%)",
+        title: "Quran Application",
+        description: "Mobile-first Quran reading experience with clean typography.",
+        tags: ["React Native", "Audio"],
+        gradient: "linear-gradient(135deg, #0f0f1f 0%, #1a1a3f 50%, #0a0a1a 100%)",
         href: "#"
     }
 ];

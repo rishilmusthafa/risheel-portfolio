@@ -16,6 +16,7 @@ export interface Project {
     tags: string[];
     gradient: string;
     href: string;
+    image?: string;
 }
 
 export interface SkillCategory {

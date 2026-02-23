@@ -97,10 +97,10 @@ export default function Contact() {
   const handleMouseLeave = () => { mouseX.set(0.5); mouseY.set(0.5); };
 
   const buttons = [
-    { label: 'Email Me',    href: 'mailto:hello@risheel.dev', isEmail: true  },
-    { label: 'LinkedIn',    href: 'https://linkedin.com/in/risheel'           },
-    { label: 'GitHub',      href: 'https://github.com/risheel'               },
-    { label: 'Download CV', href: '#'                                         },
+    { label: 'Email Me',    href: 'mailto:rishilmusthafa@gmail.com',                                    isEmail: true  },
+    { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/risheel-musthafa-68694099/'                             },
+    { label: 'GitHub',      href: 'https://github.com/rishilmusthafa?tab=repositories'                                },
+    { label: 'Download CV', href: '#'                                                                                  },
   ];
 
   return (
@@ -221,7 +221,7 @@ export default function Contact() {
         <div
           className="max-md:hidden"
           style={{
-            flex: '0 0 clamp(360px, 44vw, 600px)',
+            flex: '0 0 clamp(440px, 50vw, 700px)',
             height: 'clamp(540px, 78vh, 860px)',
             position: 'relative',
             // Fade all edges seamlessly into the section bg (#0a0a0a)
