@@ -67,7 +67,7 @@ export default function Skills() {
           style={{
             display: 'grid',
             gap: '2px',
-            marginBottom: '80px',
+            marginBottom: 'clamp(40px, 8vw, 80px)',
           }}
           className="grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1"
         >

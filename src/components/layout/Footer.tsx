@@ -34,7 +34,6 @@ export default function Footer() {
     <footer
       style={{
         borderTop: '1px solid var(--border)',
-        padding: '40px 48px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -42,7 +41,7 @@ export default function Footer() {
         gap: '16px',
         position: 'relative',
       }}
-      className="max-md:px-6 max-md:flex-col max-md:text-center"
+      className="px-12 py-10 max-md:px-6 max-md:py-6 max-md:flex-col max-md:text-center"
     >
       {/* Gradient accent line — overlays the border-top with a glow */}
       <div

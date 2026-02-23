@@ -200,6 +200,17 @@ body {
   background: rgba(255, 255, 255, 0.12);
 }
 
+/* ─── Hero — Nest Hub (1024×600) font fix ───────────────────────────────── */
+/* The badge overlaps the fixed navbar at 600 px height because the title    */
+/* stack is too tall. Shrinking from 22vh→18vh at ≤650 px moves content top  */
+/* to ~106 px — safely clear of the ~70 px navbar. !important is required to */
+/* override the React inline style. Nest Hub Max (800 px) is unaffected.     */
+@media (max-height: 650px) {
+  .hero-title-word {
+    font-size: clamp(52px, min(14vw, 18vh), 210px) !important;
+  }
+}
+
 /* ─── Reduced motion ─────────────────────────────────────────────────────── */
 /* Collapses all CSS animations/transitions for users who opt out of motion.  */
 /* Framer Motion honours this automatically via its own media-query check.    */

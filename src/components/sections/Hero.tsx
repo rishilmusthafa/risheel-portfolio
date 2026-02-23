@@ -84,7 +84,7 @@ export default function Hero() {
         overflow: 'hidden',
         background: 'var(--bg)',
       }}
-      className="px-12 pb-20 max-md:px-6 max-md:pb-16"
+      className="px-12 pb-20 max-md:px-6 max-md:pb-16 [@media(max-height:850px)]:pb-10"
     >
       {/* ── Video background — deepest layer ────────────────────────────── */}
       <div
@@ -203,7 +203,7 @@ export default function Hero() {
             height: '1px',
             background: 'var(--border)',
           }}
-          className="left-12 right-12 max-md:left-6 max-md:right-6"
+          className="left-12 right-12 max-md:left-6 max-md:right-6 [@media(max-height:850px)]:hidden"
         />
       </div>
 
@@ -227,7 +227,7 @@ export default function Hero() {
           <span
             style={{
               fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
-              fontSize: 'clamp(140px, 22vw, 360px)',
+              fontSize: 'clamp(80px, 22vw, 360px)',
               color: 'transparent',
               WebkitTextStroke: '1px rgba(255,255,255,0.04)',
               whiteSpace: 'nowrap',
@@ -251,7 +251,7 @@ export default function Hero() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '10px',
-            marginBottom: '28px',
+            marginBottom: 'min(28px, 4vh)',
             padding: '8px 16px',
             border: '1px solid rgba(232,255,71,0.18)',
             background: 'rgba(232,255,71,0.04)',
@@ -289,16 +289,17 @@ export default function Hero() {
           variants={titleVariants}
           initial="hidden"
           animate="visible"
-          style={{ marginBottom: '56px' }}
+          style={{ marginBottom: 'min(56px, 6vh)' }}
         >
           {(['Senior', 'Software', 'Engineer'] as const).map((word, i) => (
             <div key={word} style={{ overflow: 'hidden', lineHeight: 0.92 }}>
               <motion.span
                 variants={lineVariants}
+                className="hero-title-word"
                 style={{
                   display: 'block',
                   fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
-                  fontSize: 'clamp(52px, 14vw, 210px)',
+                  fontSize: 'clamp(52px, min(14vw, 22vh), 210px)',
                   lineHeight: 0.88,
                   letterSpacing: '-0.02em',
                   color: i === 2 ? 'var(--accent)' : 'var(--text)',
@@ -403,7 +404,7 @@ export default function Hero() {
           gap: '14px',
           zIndex: 4,
         }}
-        className="max-md:hidden"
+        className="max-md:hidden [@media(max-height:850px)]:hidden"
       >
         <span
           style={{

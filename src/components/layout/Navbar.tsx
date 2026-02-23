@@ -56,10 +56,9 @@ export default function Navbar() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '24px 48px',
           mixBlendMode: 'difference',
         }}
-        className="max-md:px-6 max-md:py-4"
+        className="px-12 py-6 max-md:px-6 max-md:py-4"
       >
         {/* Logo */}
         <a

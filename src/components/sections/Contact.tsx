@@ -219,7 +219,7 @@ export default function Contact() {
 
         {/* RIGHT — 3D model (hidden on mobile) */}
         <div
-          className="max-md:hidden"
+          className="max-lg:hidden"
           style={{
             flex: '0 0 clamp(440px, 50vw, 700px)',
             height: 'clamp(540px, 78vh, 860px)',

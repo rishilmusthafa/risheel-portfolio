@@ -61,7 +61,7 @@ export default function MusicPlayer() {
         style={{
           position: "fixed",
           bottom: bottomOffset,
-          right: 28,
+          right: 'clamp(12px, 2vw, 28px)',
           transition: 'bottom 0.3s ease',
           zIndex: 9999,
           display: "flex",
@@ -87,7 +87,7 @@ export default function MusicPlayer() {
                 WebkitBackdropFilter: "blur(16px)",
                 borderRadius: 12,
                 padding: "12px 16px",
-                minWidth: 200,
+                minWidth: 'min(200px, calc(100vw - 56px))',
                 boxShadow: playing
                   ? "0 0 18px rgba(232,255,71,0.08)"
                   : "0 4px 24px rgba(0,0,0,0.4)",
