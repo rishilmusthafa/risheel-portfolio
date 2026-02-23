@@ -32,7 +32,7 @@ const dmMono = DM_Mono({
   display: 'swap',
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://risheel.dev';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rishilmusthafa.com';
 
 export const viewport: Viewport = {
   width: 'device-width',
