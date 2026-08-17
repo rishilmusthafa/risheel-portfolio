@@ -99,7 +99,7 @@ body {
   background: var(--accent);
   pointer-events: none;
   mix-blend-mode: difference;
-  z-index: 9999;
+  z-index: 10001;
   transform: translate(-50%, -50%);
   transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
@@ -119,7 +119,7 @@ body {
   border: 1px solid rgba(232, 255, 71, 0.6);
   pointer-events: none;
   mix-blend-mode: difference;
-  z-index: 9998;
+  z-index: 10000;
   transform: translate(-50%, -50%);
   transition: opacity 0.25s, border-color 0.25s;
   will-change: transform;

@@ -77,6 +77,7 @@ export function MusicPlayerProvider({ children }: { children: React.ReactNode })
     try {
       await audio.play();
       setPlaying(true);
+      // eslint-disable-next-line react-hooks/immutability -- ref intentionally mutated outside the visibilitychange effect that reads it; safe under the classic (non-Compiler) React model this predates
       manuallyPaused.current = false;
     } catch {
       setPending(true); // browser blocked — will resume on first interaction
@@ -90,6 +91,7 @@ export function MusicPlayerProvider({ children }: { children: React.ReactNode })
       audio.pause();
       setPlaying(false);
       setPending(false);
+      // eslint-disable-next-line react-hooks/immutability -- see triggerPlay above
       manuallyPaused.current = true;
     } else {
       try {

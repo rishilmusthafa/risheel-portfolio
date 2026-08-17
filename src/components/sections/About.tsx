@@ -172,8 +172,9 @@ export default function About() {
               <>
                 I&apos;m a{' '}
                 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Senior Software Engineer</strong>{' '}
-                based in Dubai with 12+ years of experience building production-ready software
-                that is fast, accessible, and visually refined.
+                based in Dubai with 14+ years of experience delivering production-grade software for{' '}
+                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>UAE government, banking, and energy</strong>{' '}
+                clients — including Dubai Police, ADNOC, ADCB, and AWQAF.
               </>,
               <>
                 My work lives at the intersection of{' '}

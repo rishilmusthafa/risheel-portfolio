@@ -4,12 +4,16 @@ import Script from 'next/script';
 import './globals.css';
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import { MusicPlayerProvider } from '@/context/MusicPlayerContext';
+import { ChatWidgetProvider } from '@/context/ChatWidgetContext';
+import { PortfolioActionProvider } from '@/context/PortfolioActionBridge';
 import PageLoader from '@/components/PageLoader';
 import CustomCursor from '@/components/ui/CustomCursor';
 import NoiseOverlay from '@/components/ui/NoiseOverlay';
 import MusicPlayer from '@/components/ui/MusicPlayer';
+import AskAI from '@/components/ui/AskAI';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { AI_WIDGET_ENABLED } from '@/lib/ai/publicConfig';
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
@@ -62,7 +66,6 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Risheel — Senior Software Engineer',
     description: 'Senior Software Engineer based in Dubai. Next.js · AI · Enterprise Apps.',
-    creator: '@risheel',
     images: ['/LinkedinPost.png'],
   },
   icons: {
@@ -80,51 +83,56 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <SmoothScrollProvider>
           <MusicPlayerProvider>
-            <PageLoader />
-            <CustomCursor />
-            <NoiseOverlay />
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  '@context': 'https://schema.org',
-                  '@type': 'Person',
-                  name: 'Risheel',
-                  jobTitle: 'Senior Software Engineer',
-                  url: SITE_URL,
-                  worksFor: { '@type': 'Organization', name: 'e& enterprise' },
-                  address: { '@type': 'PostalAddress', addressLocality: 'Dubai', addressCountry: 'AE' },
-                  knowsAbout: ['Next.js', 'React', 'TypeScript', 'AI Automation', 'n8n', 'Claude AI'],
-                }),
-              }}
-            />
-            {/* Google Analytics */}
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-              `}
-            </Script>
-            {/* Microsoft Clarity */}
-            <Script id="microsoft-clarity" strategy="afterInteractive">
-              {`
-                (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", '${process.env.NEXT_PUBLIC_CLARITY_ID}');
-              `}
-            </Script>
-            <MusicPlayer />
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
+            <ChatWidgetProvider>
+              <PortfolioActionProvider>
+                <PageLoader />
+                <CustomCursor />
+                <NoiseOverlay />
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                      '@context': 'https://schema.org',
+                      '@type': 'Person',
+                      name: 'Risheel',
+                      jobTitle: 'Senior Software Engineer',
+                      url: SITE_URL,
+                      worksFor: { '@type': 'Organization', name: 'e& enterprise' },
+                      address: { '@type': 'PostalAddress', addressLocality: 'Dubai', addressCountry: 'AE' },
+                      knowsAbout: ['Next.js', 'React', 'TypeScript', 'AI Automation', 'n8n', 'Claude AI', 'Azure OpenAI', 'RAG Systems'],
+                    }),
+                  }}
+                />
+                {/* Google Analytics */}
+                <Script
+                  src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+                  strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                  {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+                  `}
+                </Script>
+                {/* Microsoft Clarity */}
+                <Script id="microsoft-clarity" strategy="afterInteractive">
+                  {`
+                    (function(c,l,a,r,i,t,y){
+                      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                    })(window, document, "clarity", "script", '${process.env.NEXT_PUBLIC_CLARITY_ID}');
+                  `}
+                </Script>
+                <MusicPlayer />
+                {AI_WIDGET_ENABLED && <AskAI />}
+                <Navbar />
+                <main>{children}</main>
+                <Footer />
+              </PortfolioActionProvider>
+            </ChatWidgetProvider>
           </MusicPlayerProvider>
         </SmoothScrollProvider>
       </body>

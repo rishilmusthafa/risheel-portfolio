@@ -5,6 +5,8 @@ import { motion, useInView, useMotionValue, useSpring, useTransform } from 'fram
 import dynamic from 'next/dynamic';
 import RevealText from '@/components/ui/RevealText';
 import SectionLabel from '@/components/ui/SectionLabel';
+import { useChatWidget } from '@/context/ChatWidgetContext';
+import { AI_WIDGET_ENABLED } from '@/lib/ai/publicConfig';
 
 // Dynamic import to avoid SSR issues with WebGL
 const ContactModel = dynamic(() => import('@/components/ui/ContactModel'), { ssr: false });
@@ -13,16 +15,18 @@ interface ContactButtonProps {
   label: string;
   href: string;
   isEmail?: boolean;
+  download?: string;
 }
 
-function ContactButton({ label, href, isEmail }: ContactButtonProps) {
+function ContactButton({ label, href, isEmail, download }: ContactButtonProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <motion.a
       href={href}
-      target={href.startsWith('http') ? '_blank' : undefined}
-      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+      download={download}
+      target={!download && href.startsWith('http') ? '_blank' : undefined}
+      rel={!download && href.startsWith('http') ? 'noopener noreferrer' : undefined}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       style={{
@@ -71,6 +75,7 @@ function ContactButton({ label, href, isEmail }: ContactButtonProps) {
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const { openChat } = useChatWidget();
 
   // ── Mouse parallax setup ─────────────────────────────────────────────────
   const mouseX = useMotionValue(0.5);
@@ -98,9 +103,10 @@ export default function Contact() {
 
   const buttons = [
     { label: 'Email Me',    href: 'mailto:rishilmusthafa@gmail.com',                                    isEmail: true  },
+    { label: 'WhatsApp',    href: 'https://wa.me/971508400599'                                                         },
     { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/risheel-musthafa-68694099/'                             },
     { label: 'GitHub',      href: 'https://github.com/rishilmusthafa?tab=repositories'                                },
-    { label: 'Download CV', href: '#'                                                                                  },
+    { label: 'Download CV', href: '/Risheel-Musthafa-CV.pdf', download: 'Risheel-Musthafa-CV.pdf'                     },
   ];
 
   return (
@@ -215,6 +221,33 @@ export default function Contact() {
               </motion.div>
             ))}
           </div>
+
+          {/* Ask AI CTA — opens the floating chat widget via shared context */}
+          {AI_WIDGET_ENABLED && (
+          <motion.button
+            type="button"
+            onClick={openChat}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 + buttons.length * 0.1 }}
+            style={{
+              display: 'block',
+              marginTop: '20px',
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+              fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+              fontSize: '12px',
+              color: 'var(--muted)',
+              letterSpacing: '0.06em',
+              textDecoration: 'underline',
+              textUnderlineOffset: '3px',
+            }}
+          >
+            Or ask my AI assistant ↗
+          </motion.button>
+          )}
         </div>
 
         {/* RIGHT — 3D model (hidden on mobile) */}

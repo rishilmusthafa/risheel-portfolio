@@ -12,16 +12,17 @@ import {
 import SectionLabel from '@/components/ui/SectionLabel';
 import { projects } from '@/lib/data';
 import type { Project } from '@/types';
+import { usePortfolioActionBridge } from '@/context/PortfolioActionBridge';
 
-// Per-project accent orb positions
+// Per-flagship-project accent orb positions (decorative, positional only)
 const ORB_POSITIONS = [
-  { top: '45%', left: '35%' },  // DevOps AI
-  { top: '30%', left: '62%' },  // Instruction Stability Engine
-  { top: '55%', left: '25%' },  // Enterprise Component Library
-  { top: '20%', left: '50%' },  // AI Code Review System
-  { top: '65%', left: '42%' },  // WhatsApp Automation Platform
-  { top: '38%', left: '68%' },  // Quran Application
-  { top: '50%', left: '30%' },  // Smart Khateeb
+  { top: '45%', left: '35%' },
+  { top: '30%', left: '62%' },
+  { top: '55%', left: '25%' },
+  { top: '20%', left: '50%' },
+  { top: '65%', left: '42%' },
+  { top: '38%', left: '68%' },
+  { top: '50%', left: '30%' },
 ];
 
 const WIPE_TRANSITION = {
@@ -447,58 +448,72 @@ function ProjectItem({
           ))}
         </motion.div>
 
-        {/* CTA */}
-        <motion.div
-          animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 8 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-        >
-          <a
-            href={project.href}
-            style={{
-              fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-              fontSize: '12px',
-              color: 'var(--accent)',
-              textDecoration: 'none',
-              borderBottom: '1px solid rgba(232,255,71,0.35)',
-              letterSpacing: '0.08em',
-              paddingBottom: '3px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}
+        {/* CTA — only for projects with a real public link */}
+        {project.href !== '#' && (
+          <motion.div
+            animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 8 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
           >
-            View Project ↗
-          </a>
-        </motion.div>
+            <a
+              href={project.href}
+              style={{
+                fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                fontSize: '12px',
+                color: 'var(--accent)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(232,255,71,0.35)',
+                letterSpacing: '0.08em',
+                paddingBottom: '3px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              View Project ↗
+            </a>
+          </motion.div>
+        )}
       </div>
     </div>
   );
 }
 
-// ── Mobile card (simplified vertical stack) ───────────────────────────────
-function MobileProjectCard({
+// ── Compact card — mobile stack + desktop grid (non-flagship projects) ────
+function ProjectCard({
   project,
   index,
+  highlighted,
+  cardRef,
 }: {
   project: Project;
   index: number;
+  highlighted?: boolean;
+  cardRef?: (el: HTMLDivElement | null) => void;
 }) {
   const [flipped, setFlipped] = useState(false);
 
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
+      animate={{
+        borderColor: highlighted ? 'rgba(232,255,71,0.9)' : 'var(--border)',
+        boxShadow: highlighted ? '0 0 0 1px rgba(232,255,71,0.4), 0 0 28px rgba(232,255,71,0.3)' : '0 0 0 0px rgba(232,255,71,0)',
+      }}
       transition={{
         duration: 0.6,
         delay: index * 0.08,
         ease: [0.16, 1, 0.3, 1],
+        borderColor: { duration: 0.4 },
+        boxShadow: { duration: 0.4 },
       }}
       onClick={() => { if (project.image) setFlipped((f) => !f); }}
       style={{
         position: 'relative',
-        border: '1px solid var(--border)',
+        borderWidth: '1px',
+        borderStyle: 'solid',
         aspectRatio: '4/3',
         cursor: project.image ? 'pointer' : 'default',
         perspective: 1200,
@@ -552,7 +567,7 @@ function MobileProjectCard({
                 marginBottom: '10px',
               }}
             >
-              {project.tags.map((tag) => (
+              {project.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
                   style={{
@@ -572,7 +587,7 @@ function MobileProjectCard({
             <div
               style={{
                 fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
-                fontSize: 'clamp(24px, 6vw, 40px)',
+                fontSize: 'clamp(20px, 5vw, 40px)',
                 letterSpacing: '0.02em',
                 lineHeight: 1,
                 marginBottom: '8px',
@@ -585,8 +600,12 @@ function MobileProjectCard({
                 fontSize: '12px',
                 opacity: 0.45,
                 fontWeight: 300,
-                lineHeight: 1.6,
+                lineHeight: 1.5,
                 margin: 0,
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical' as const,
+                overflow: 'hidden',
               }}
             >
               {project.description}
@@ -605,7 +624,7 @@ function MobileProjectCard({
               >
                 tap to preview
               </span>
-            ) : (
+            ) : project.href !== '#' ? (
               <a
                 href={project.href}
                 style={{
@@ -624,7 +643,7 @@ function MobileProjectCard({
               >
                 View Project ↗
               </a>
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -694,25 +713,27 @@ function MobileProjectCard({
               }}>
                 {project.title}
               </span>
-              <a
-                href={project.href}
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                  fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-                  fontSize: '11px',
-                  color: 'var(--accent)',
-                  textDecoration: 'none',
-                  borderBottom: '1px solid rgba(232,255,71,0.35)',
-                  letterSpacing: '0.08em',
-                  paddingBottom: '2px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  pointerEvents: 'auto',
-                }}
-              >
-                View Project ↗
-              </a>
+              {project.href !== '#' && (
+                <a
+                  href={project.href}
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                    fontSize: '11px',
+                    color: 'var(--accent)',
+                    textDecoration: 'none',
+                    borderBottom: '1px solid rgba(232,255,71,0.35)',
+                    letterSpacing: '0.08em',
+                    paddingBottom: '2px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    pointerEvents: 'auto',
+                  }}
+                >
+                  View Project ↗
+                </a>
+              )}
             </div>
           </div>
         )}
@@ -722,8 +743,14 @@ function MobileProjectCard({
 }
 
 // ── Main component ────────────────────────────────────────────────────────
+// Flagship projects drive the sticky-scroll experience; the rest render as a
+// static grid below it — keeps the section from becoming N viewports tall
+// as the project count grows.
+const flagshipProjects = projects.filter((p) => p.featured);
+const gridProjects = projects.filter((p) => !p.featured);
+
 export default function Projects() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -735,9 +762,13 @@ export default function Projects() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  // Scroll tracking — target the outer section
+  // Scroll tracking — target the outer (flagship) section.
+  // On mobile, sectionRef is never attached (the mobile branch renders a
+  // different element tree), so pass `undefined` instead of a ref that will
+  // never hydrate — Framer Motion throws otherwise ("Target ref is defined
+  // but not hydrated"). Nothing on mobile reads scrollYProgress anyway.
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: isMobile ? undefined : sectionRef,
     offset: ['start start', 'end end'],
   });
 
@@ -745,12 +776,12 @@ export default function Projects() {
   const floatIndex = useTransform(
     scrollYProgress,
     [0, 1],
-    [0, projects.length - 1]
+    [0, flagshipProjects.length - 1]
   );
 
   useMotionValueEvent(floatIndex, 'change', (v) => {
     setActiveIndex(
-      Math.round(Math.max(0, Math.min(projects.length - 1, v)))
+      Math.round(Math.max(0, Math.min(flagshipProjects.length - 1, v)))
     );
   });
 
@@ -758,10 +789,10 @@ export default function Projects() {
   const rightY = useTransform(
     scrollYProgress,
     [0, 1],
-    ['0vh', `${-(projects.length - 1) * 100}vh`]
+    ['0vh', `${-(flagshipProjects.length - 1) * 100}vh`]
   );
 
-  // Scroll to a specific project by computing its position in the section
+  // Scroll to a specific flagship project by computing its position in the section
   const scrollToProject = (index: number) => {
     const el = sectionRef.current;
     if (!el) return;
@@ -770,7 +801,45 @@ export default function Projects() {
     window.scrollTo({ top: sectionTop + index * window.innerHeight, behavior: 'smooth' });
   };
 
-  // ── Mobile layout ──────────────────────────────────────────────────────
+  // ── Ask AI "highlightProject" handler ───────────────────────────────────
+  // Every project renders as a ProjectCard on mobile (flagship and grid
+  // alike), and as a ProjectCard in the desktop grid — cardRefs covers both.
+  // Only desktop-flagship projects (rendered via ProjectVisual/ProjectItem,
+  // not ProjectCard) have no ref here, so the fallback path handles exactly
+  // that one remaining case via the existing scrollToProject(index).
+  //
+  // Ref lookup MUST come first: scrollToProject relies on sectionRef, which
+  // is never attached on mobile (the mobile branch renders a different
+  // element tree) — calling it there would silently no-op while the tool
+  // result still says `applied: true`, so a "flagship -> scrollToProject,
+  // grid -> ref" split would falsely claim success on mobile flagship asks.
+  const cardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+  const [highlightedId, setHighlightedId] = useState<number | null>(null);
+  const highlightTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { register } = usePortfolioActionBridge();
+
+  useEffect(() => {
+    return register((action) => {
+      if (action.kind !== 'highlightProject') return;
+      const cardEl = cardRefs.current.get(action.projectId);
+      if (cardEl) {
+        cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        const flagshipIndex = flagshipProjects.findIndex((p) => p.id === action.projectId);
+        if (flagshipIndex !== -1) scrollToProject(flagshipIndex);
+      }
+      setHighlightedId(action.projectId);
+      if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
+      highlightTimeoutRef.current = setTimeout(() => setHighlightedId(null), 2200);
+    });
+  }, [register]);
+
+  const registerCardRef = (id: number) => (el: HTMLDivElement | null) => {
+    if (el) cardRefs.current.set(id, el);
+    else cardRefs.current.delete(id);
+  };
+
+  // ── Mobile layout — every project in one flat stack ────────────────────
   if (isMobile) {
     return (
       <section
@@ -789,143 +858,184 @@ export default function Projects() {
           }}
         >
           {projects.map((project, i) => (
-            <MobileProjectCard key={project.id} project={project} index={i} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={i}
+              highlighted={highlightedId === project.id}
+              cardRef={registerCardRef(project.id)}
+            />
           ))}
         </div>
       </section>
     );
   }
 
-  // ── Desktop: sticky scroll panel ──────────────────────────────────────
+  // ── Desktop: sticky scroll panel (flagships) + static grid (rest) ──────
   return (
-    <section
-      ref={sectionRef}
-      id="projects"
-      style={{
-        height: `${projects.length * 100}vh`,
-        background: 'var(--bg2)',
-        position: 'relative',
-      }}
-    >
-      {/* Sticky viewport */}
+    <section id="projects" style={{ background: 'var(--bg2)' }}>
       <div
+        ref={sectionRef}
         style={{
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
-          display: 'flex',
-          overflow: 'hidden',
+          height: `${flagshipProjects.length * 100}vh`,
+          position: 'relative',
         }}
       >
-        {/* ── LEFT PANEL (55%) ────────────────────────────────────────── */}
+        {/* Sticky viewport */}
         <div
           style={{
-            width: '55%',
-            position: 'relative',
+            position: 'sticky',
+            top: 0,
+            height: '100vh',
+            display: 'flex',
             overflow: 'hidden',
-            flexShrink: 0,
           }}
         >
-          {/* Section label overlay */}
+          {/* ── LEFT PANEL (55%) ────────────────────────────────────────── */}
+          <div
+            style={{
+              width: '55%',
+              position: 'relative',
+              overflow: 'hidden',
+              flexShrink: 0,
+            }}
+          >
+            {/* Section label overlay */}
+            <div
+              style={{
+                position: 'absolute',
+                top: 'clamp(76px, 9vh, 100px)',
+                left: 'clamp(24px, 3vw, 48px)',
+                zIndex: 10,
+              }}
+            >
+              <SectionLabel number="004" text="Projects" />
+            </div>
+
+            <AnimatePresence mode="wait">
+              <ProjectVisual
+                key={activeIndex}
+                project={flagshipProjects[activeIndex]}
+                index={activeIndex}
+              />
+            </AnimatePresence>
+          </div>
+
+          {/* ── DIVIDER ─────────────────────────────────────────────────── */}
+          <div
+            style={{
+              width: '1px',
+              background:
+                'linear-gradient(to bottom, transparent 0%, var(--border) 15%, var(--border) 85%, transparent 100%)',
+              position: 'relative',
+              flexShrink: 0,
+            }}
+          >
+            {/* Pulsing dot at midpoint */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: 'var(--accent)',
+                animation: 'pulse-dot 2s ease-in-out infinite',
+              }}
+            />
+          </div>
+
+          {/* ── RIGHT PANEL (45%) ───────────────────────────────────────── */}
+          <div
+            style={{
+              flex: 1,
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            {/* Raw Y transform — no spring wrapper */}
+            <motion.div style={{ y: rightY }}>
+              {flagshipProjects.map((project, i) => (
+                <ProjectItem
+                  key={project.id}
+                  project={project}
+                  isActive={i === activeIndex}
+                />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* ── PROGRESS TICKS (far right edge) ─────────────────────────── */}
           <div
             style={{
               position: 'absolute',
-              top: 'clamp(76px, 9vh, 100px)',
-              left: 'clamp(24px, 3vw, 48px)',
+              right: 'clamp(14px, 2vw, 28px)',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+              alignItems: 'center',
               zIndex: 10,
             }}
           >
-            <SectionLabel number="004" text="Projects" />
-          </div>
-
-          <AnimatePresence mode="wait">
-            <ProjectVisual
-              key={activeIndex}
-              project={projects[activeIndex]}
-              index={activeIndex}
-            />
-          </AnimatePresence>
-        </div>
-
-        {/* ── DIVIDER ─────────────────────────────────────────────────── */}
-        <div
-          style={{
-            width: '1px',
-            background:
-              'linear-gradient(to bottom, transparent 0%, var(--border) 15%, var(--border) 85%, transparent 100%)',
-            position: 'relative',
-            flexShrink: 0,
-          }}
-        >
-          {/* Pulsing dot at midpoint */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              background: 'var(--accent)',
-              animation: 'pulse-dot 2s ease-in-out infinite',
-            }}
-          />
-        </div>
-
-        {/* ── RIGHT PANEL (45%) ───────────────────────────────────────── */}
-        <div
-          style={{
-            flex: 1,
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Raw Y transform — no spring wrapper */}
-          <motion.div style={{ y: rightY }}>
-            {projects.map((project, i) => (
-              <ProjectItem
-                key={project.id}
-                project={project}
-                isActive={i === activeIndex}
+            {flagshipProjects.map((_, i) => (
+              <motion.button
+                key={i}
+                onClick={() => scrollToProject(i)}
+                animate={{
+                  height: i === activeIndex ? 24 : 8,
+                  background:
+                    i === activeIndex ? 'var(--accent)' : 'var(--muted)',
+                  opacity: i === activeIndex ? 1 : 0.5,
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                style={{
+                  width: '2px',
+                  borderRadius: '1px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 0,
+                }}
+                aria-label={`Go to project ${i + 1}: ${flagshipProjects[i].title}`}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
+      </div>
 
-        {/* ── PROGRESS TICKS (far right edge) ─────────────────────────── */}
+      {/* ── More projects — static grid, no scroll-jacking ─────────────── */}
+      <div
+        style={{
+          padding: 'clamp(60px, 8vw, 100px) clamp(24px, 3vw, 48px) clamp(80px, 10vw, 140px)',
+          borderTop: '1px solid var(--border)',
+        }}
+      >
         <div
           style={{
-            position: 'absolute',
-            right: 'clamp(14px, 2vw, 28px)',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px',
-            alignItems: 'center',
-            zIndex: 10,
+            fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+            fontSize: '11px',
+            color: 'var(--muted)',
+            letterSpacing: '0.25em',
+            textTransform: 'uppercase' as const,
+            marginBottom: '40px',
           }}
         >
-          {projects.map((_, i) => (
-            <motion.button
-              key={i}
-              onClick={() => scrollToProject(i)}
-              animate={{
-                height: i === activeIndex ? 24 : 8,
-                background:
-                  i === activeIndex ? 'var(--accent)' : 'var(--muted)',
-                opacity: i === activeIndex ? 1 : 0.5,
-              }}
-              transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-              style={{
-                width: '2px',
-                borderRadius: '1px',
-                border: 'none',
-                cursor: 'pointer',
-                padding: 0,
-              }}
-              aria-label={`Go to project ${i + 1}: ${projects[i].title}`}
+          More Work
+        </div>
+        <div
+          style={{ display: 'grid', gap: '2px' }}
+          className="grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1"
+        >
+          {gridProjects.map((project, i) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={i}
+              highlighted={highlightedId === project.id}
+              cardRef={registerCardRef(project.id)}
             />
           ))}
         </div>
